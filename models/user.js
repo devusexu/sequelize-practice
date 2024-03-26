@@ -11,22 +11,35 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      User.hasMany(models.Book);
+      User.hasMany(models.Book, {
+        onDelete: 'CASCADE',
+        foreignKey: 'ownerId'
+      });
     }
   }
   User.init({
     name: {
       type: DataTypes.STRING,
       allowNull: false,
+      validate: {
+        len: [3, 255]
+      }
     },
     email: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true
+      unique: true,
+      validate: {
+        isEmail: true,
+        len: [, 10]
+      }
     },
     password: {
       type: DataTypes.STRING,
       allowNull: false,
+      validate: {
+        len: [8, 255]
+      }
     },
   }, {
     sequelize,

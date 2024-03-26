@@ -21,12 +21,15 @@ module.exports = (sequelize, DataTypes) => {
     title: {
       type: DataTypes.STRING,
       allowNull: false,
+      validate: {
+        len: [3, 255]
+      }
     },
     author: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    userId: {
+    ownerId: {
       type: DataTypes.INTEGER,
       allowNull: false,
     }
